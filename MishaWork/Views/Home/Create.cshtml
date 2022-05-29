@@ -1,0 +1,23 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model MishaWork.Models.User
+@{
+    Layout = "_Layout";
+}
+<h2>Добавление пользователя</h2>
+<form asp-action="create" asp-controller="home" method = "post">
+    <p>
+        <label asp-for="Name">Имя</label><br />
+        <input type="text" asp-for="Name" />
+    </p>
+    <p>
+        <label asp-for="Password">Пароль</label><br />
+        <input type="password" asp-for="Password" />
+    </p>
+    <p>
+        <label asp-for="IsAdmin">Админ?</label><br />
+        <input type="checkbox" asp-for="IsAdmin" />
+    </p>
+    <p>
+        <input type="submit" value="Отправить" />
+    </p>
+</form>

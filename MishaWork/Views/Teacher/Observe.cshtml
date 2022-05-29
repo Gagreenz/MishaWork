@@ -1,0 +1,25 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using MishaWork.Models
+@model IEnumerable<MishaWork.Models.User>
+@{
+}
+@foreach(User user in Model)
+{
+    <a asp-action = "CheckWork" asp-controller = "Teacher" asp-route-id ="@user.Id" >|@user.Name</a>      
+}
+@*@using (Html.BeginForm("CheckWork", "Teacher", FormMethod.Post))
+{
+    <select>
+        @foreach(var user in Model)
+        {
+            <option>
+                @user.Name;
+            </option>
+        }
+    </select>
+    
+    <br />
+    <p>
+        <input type="submit" value="Отправить" />
+    </p>
+}*@

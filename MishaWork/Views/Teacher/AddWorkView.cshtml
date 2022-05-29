@@ -1,0 +1,38 @@
+﻿@using MishaWork.MyDbContext
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model MishaWork.Models.Subject
+@inject ApplicationDbContext db
+@{
+    Layout = "_Layout";
+}
+<h1>Добавление задания</h1>
+<form asp-action = "AddWorkToStudent" asp-controller = "Teacher" method = "post">
+    <p>
+        <label asp-for="Name">Имя Предмета</label><br />
+        <input type="text" asp-for="Name" />
+    </p>
+    <p>
+        <label asp-for="Date">Дата сдачи</label><br />
+        <input type="date" asp-for="Date" />
+    </p>
+    <p>
+        <label asp-for="TeacherComment">Комментарий</label><br />
+        <input type="text" asp-for="TeacherComment" />
+    </p>
+    <p>
+        <label asp-for="UserId">Кому добавить?</label><br />
+        <select asp-for = "UserId">
+        @foreach(var user in db.Users)
+        {
+            @if(!user.IsAdmin)
+            {
+                <option value = "@user.Id">@user.Name </option>  
+            }
+                
+        }
+        </select>
+    </p>
+    <p>
+        <input type="submit" value="Отправить" />
+    </p>
+</form>

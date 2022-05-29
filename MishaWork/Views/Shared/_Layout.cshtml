@@ -1,0 +1,38 @@
+﻿@using MishaWork
+<!DOCTYPE html>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h1>Сайт контроля успеваемости</h1>
+    @if(UserUtilities.GetUser() == null)
+    {
+            <a asp-action = "LogIn" asp-controller = "Home">Авторизация /</a>
+            <a asp-action = "Create" asp-controller = "Home"> Регистрация</a>
+    }
+    else
+    {
+        <b>Здраствуйте @UserUtilities.GetUser().Name</b>
+        <a asp-action = "LogOut" asp-controller = "Home"> Выйти из профиля</a>
+        if(UserUtilities.GetUser().IsAdmin)
+        {
+            <div>
+                <a asp-action = "Observe" asp-controller = "Teacher">Проверить работы</a>
+            </div>
+        }
+        else
+        {
+            <div>
+                <a asp-action = "OpenCalendar" asp-controller = "Student">Открыть календарь</a>
+            </div>
+        }
+    }
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<MishaWork.Models.Subject>
+
+<table>
+    @foreach(var subject in Model)
+    {
+    <tr>
+        <td>
+            <p>Название предмета:</p>
+            @subject.Name;
+            <p>Комментарий учителя</p>
+            @subject.TeacherComment;
+            <form asp-action ="LoadFile" asp-controller ="teacher">
+                <input type="file">
+                <input type ="submit">
+            </form>
+
+        </td>
+    </tr>
+    }
+    
+</table>
