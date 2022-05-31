@@ -16,9 +16,10 @@ namespace MishaWork.Controllers
 
             return View("Calendar",new Date(DateTime.Now));
         }
-        public IActionResult OpenWorkPage(DateTime tempDate)
+        public IActionResult OpenWorkPage(string date)
         {
-            var subjects = db.Subjects.Where(s => s.UserId == UserUtilities.GetUser().Id && s.Date.Day == tempDate.Month && s.Date.Month == tempDate.Day).ToList();
+            var chosedDate = Convert.ToDateTime(date);
+            var subjects = db.Subjects.Where(s => s.UserId == UserUtilities.GetUser().Id && s.Date.Day == chosedDate.Day && s.Date.Month == chosedDate.Month).ToList();
             return View("WorkPage",subjects);
         }
 

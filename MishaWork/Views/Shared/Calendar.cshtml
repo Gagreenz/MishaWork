@@ -77,7 +77,7 @@
                         @if (subjects != null && subjects.Count != 0)
                         {
                             tempDate = date.AddDays(days - 1);
-                            <a asp-action ="OpenWorkPage" asp-controller ="Student" asp-route-tempDate = @tempDate >Есть задания</a>
+                            <a asp-action ="OpenWorkPage" asp-controller ="Student" asp-route-date = "@tempDate.ToString()" >Есть задания</a>
                         }   
                         else
                         {

@@ -13,7 +13,10 @@ namespace MishaWork.MyDbContext
             //Database.EnsureDeleted();
             Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=helloapp.db");
+        }
         public User IsUserExists(User user)
         {
             foreach (var User in Users)

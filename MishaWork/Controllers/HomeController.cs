@@ -43,6 +43,12 @@ namespace MishaWork.Controllers
             UserUtilities.SetUser(null);
             return RedirectToAction("Index");
         }
+        public IActionResult LoadFile(string path)
+        {
+            UserUtilities.SetUser(null);
+            return RedirectToAction("Index");
+        }
+        
         public IActionResult Create()
         {
             return View();

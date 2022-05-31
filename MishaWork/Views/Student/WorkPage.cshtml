@@ -1,21 +1,31 @@
-﻿@model IEnumerable<MishaWork.Models.Subject>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<MishaWork.Models.Subject>
 
-<table>
+<table border = 1>
     @foreach(var subject in Model)
     {
     <tr>
         <td>
-            <p>Название предмета:</p>
+            <div>Название предмета:</div>
             @subject.Name;
-            <p>Комментарий учителя</p>
+                </td>
+    </tr>
+    <tr>
+        <td>
+            <div>Комментарий учителя</div>
             @subject.TeacherComment;
-            <form asp-action ="LoadFile" asp-controller ="teacher">
-                <input type="file">
-                <input type ="submit">
-            </form>
+            
 
         </td>
     </tr>
-    }
+    <tr>
+        <td>
+           <form asp-action ="LoadFile" asp-controller ="home" asp-route-id = "@subject.Id" >
+                <input type="file">
+                <input type ="submit">
+            </form>
+        </td>
+    </tr>
+}
     
 </table>
