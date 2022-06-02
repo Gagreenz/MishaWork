@@ -7,11 +7,12 @@ namespace MishaWork.Controllers
 {
     public class HomeController : Controller
     {
-
+        IWebHostEnvironment _appEnvironment;
         ApplicationDbContext db;
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context, IWebHostEnvironment appEnvironment)
         {
             db = context;
+            _appEnvironment = appEnvironment;
         }
         public IActionResult Calendar(int date)
         {
@@ -43,9 +44,21 @@ namespace MishaWork.Controllers
             UserUtilities.SetUser(null);
             return RedirectToAction("Index");
         }
-        public IActionResult LoadFile(string path)
+        [HttpPost]
+        public async Task<IActionResult> AddFile(IFormFile uploadedFile,int id)
         {
-            UserUtilities.SetUser(null);
+            if (uploadedFile != null)
+            {
+                // путь к папке Files
+                string path = "/Files/" + uploadedFile.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                db.Subjects.Where(s => s.Id == id).FirstOrDefault().Path = path;
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
         

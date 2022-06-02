@@ -3,23 +3,25 @@
 @model IEnumerable<MishaWork.Models.User>
 @{
 }
-@foreach(User user in Model)
-{
-    <a asp-action = "CheckWork" asp-controller = "Teacher" asp-route-id ="@user.Id" >|@user.Name</a>      
-}
-@*@using (Html.BeginForm("CheckWork", "Teacher", FormMethod.Post))
-{
-    <select>
-        @foreach(var user in Model)
+<head>
+    <link href="~/css/TeacherObserve.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <table>
+    <tr>
+        <td>
+            Ученики
+        </td>
+    </tr>
+    <tr>
+        <td>
+        @foreach(User user in Model)
         {
-            <option>
-                @user.Name;
-            </option>
+            <a asp-action = "CheckWork" asp-controller = "Teacher" asp-route-id ="@user.Id" >@user.Name</a>      
         }
-    </select>
+        </td>
+    </tr>
     
-    <br />
-    <p>
-        <input type="submit" value="Отправить" />
-    </p>
-}*@
+
+</table>
+</body>

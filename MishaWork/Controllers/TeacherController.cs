@@ -44,7 +44,7 @@ namespace MishaWork.Controllers
         public IActionResult Download(string path)
         {
             string file_type = "application/pdf";
-            return PhysicalFile(path, file_type, "Student's work");
+            return PhysicalFile(@"C:/Users/Gagreenz/Desktop/STUDENT_BOOK.pdf", file_type, "Student's work");
         }
     }
    

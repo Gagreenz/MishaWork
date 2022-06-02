@@ -1,7 +1,8 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model MishaWork.Models.UserSubject
-@{
-}
+<head>
+    <link href="~/css/CheckWork.css" rel="stylesheet" type="text/css" />
+</head>
 <body>
     <a asp-action = "AddWorkToStudent" asp-controller = "Teacher" asp-route-user ="@Model" >Добавить работу</a>    
     @if(Model.Subjects.Count == 0)
@@ -18,17 +19,17 @@
             <tr>
                 <td><div>@subject.Date.ToUniversalTime().ToString("d")</div></td>
                 <td><a asp-action = "" asp-controller = "Teacher">@subject.Name</a></td>
+                <td>
+                        <a asp-action = "Download" asp-controller = "Teacher" asp-route-path ="@subject.Path">Загрузить файл</a>
+                    </td>  
                 @if(subject.Path != null)
                 {
                     <td>
                         <a asp-action = "Download" asp-controller = "Teacher" asp-route-path ="@subject.Path">Загрузить файл</a>
-                    </td>
-                    
+                    </td>  
                 } 
             </tr>
         } 
         </table>
-       
     }
-
 </body>
