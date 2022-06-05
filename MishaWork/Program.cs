@@ -12,7 +12,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite
 //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
 
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 app.UseStaticFiles();

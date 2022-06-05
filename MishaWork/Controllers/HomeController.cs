@@ -7,12 +7,10 @@ namespace MishaWork.Controllers
 {
     public class HomeController : Controller
     {
-        IWebHostEnvironment _appEnvironment;
         ApplicationDbContext db;
-        public HomeController(ApplicationDbContext context, IWebHostEnvironment appEnvironment)
+        public HomeController(ApplicationDbContext context)
         {
             db = context;
-            _appEnvironment = appEnvironment;
         }
         public IActionResult Calendar(int date)
         {
@@ -37,29 +35,22 @@ namespace MishaWork.Controllers
             User temp = db.IsUserExists(user);
             if (temp != null)
                 UserUtilities.SetUser(temp);
-            return RedirectToAction("Index");
+            return View("Index");
         }
         public IActionResult LogOut()
         {
             UserUtilities.SetUser(null);
-            return RedirectToAction("Index");
+            return View("Index");
         }
         [HttpPost]
-        public async Task<IActionResult> AddFile(IFormFile uploadedFile)
+        public IActionResult AddFile(IFormFile uploadedFile)
         {
-            if (uploadedFile != null)
-            {
-                // путь к папке Files
-                string path = "/Files/" + uploadedFile.FileName;
-                // сохраняем файл в папку Files в каталоге wwwroot
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
-                //db.Subjects.Where(s => s.Id == id).FirstOrDefault().Path = path;
-                db.SaveChanges();
-            }
-            return RedirectToAction("Index");
+            if(uploadedFile == null) return View("Index");
+            var us = UserUtilities.GetUser();
+            var sub = db.Subjects.Where(subject => subject.UserId == us.Id).FirstOrDefault();
+            sub.Path = uploadedFile.FileName;
+            db.SaveChanges();
+            return View("Index");
         }
         
         public IActionResult Create()

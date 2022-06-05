@@ -19,9 +19,6 @@
             <tr>
                 <td><div>@subject.Date.ToUniversalTime().ToString("d")</div></td>
                 <td><a asp-action = "" asp-controller = "Teacher">@subject.Name</a></td>
-                <td>
-                        <a asp-action = "Download" asp-controller = "Teacher" asp-route-path ="@subject.Path">Загрузить файл</a>
-                    </td>  
                 @if(subject.Path != null)
                 {
                     <td>
