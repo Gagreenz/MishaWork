@@ -14,6 +14,7 @@ namespace MishaWork.Models
         public string? Path { get; set; }
         public User? User { get; set; }
         public int UserId { get; set; }
+        IFormFile file { get; set; }
 
     }
 }

@@ -45,7 +45,7 @@ namespace MishaWork.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<IActionResult> AddFile(IFormFile uploadedFile,int id)
+        public async Task<IActionResult> AddFile(IFormFile uploadedFile)
         {
             if (uploadedFile != null)
             {
@@ -56,7 +56,7 @@ namespace MishaWork.Controllers
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
-                db.Subjects.Where(s => s.Id == id).FirstOrDefault().Path = path;
+                //db.Subjects.Where(s => s.Id == id).FirstOrDefault().Path = path;
                 db.SaveChanges();
             }
             return RedirectToAction("Index");

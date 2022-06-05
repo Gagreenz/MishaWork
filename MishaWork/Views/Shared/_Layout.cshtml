@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>
-<body>
+<body  style = "background-color: #FBD603">
     <h1>Сайт контроля успеваемости</h1>
     @if(UserUtilities.GetUser() == null)
     {
@@ -26,7 +26,7 @@
         }
         else
         {
-            <div>
+            <div style = "background-color:#FF0000">
                 <a asp-action = "OpenCalendar" asp-controller = "Student">Открыть календарь</a>
             </div>
         }

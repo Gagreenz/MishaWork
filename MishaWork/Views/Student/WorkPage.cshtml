@@ -22,9 +22,8 @@
     <tr>
         <td>
            <h3>Выберите файл для загрузки</h3>
-           
-            <form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
-                <input type="File"/>
+            <form asp-action="AddFile" asp-controller="Home" method="post">
+                <input type="File" asp-data = "file">
                 <input type="submit" value="Загрузить" />
             </form>
         </td>

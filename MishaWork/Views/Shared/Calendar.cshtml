@@ -45,7 +45,14 @@
             <tr>
                 @for (int day = 0; day < 7; day++)
                 {
-                    <td>
+                    DateTime tempDate = date.AddDays(days);
+                    List<Subject> subjects = db.Subjects.Where(s => s.UserId == user.Id && s.Date.Day == tempDate.Day && s.Date.Month == tempDate.Month).ToList();
+                    var str = "";
+                    if(subjects.Count > 0 && subjects[0].Path == null && subjects[0].Date < DateTime.Now)
+                    {
+                        str ="background-color:#FF0000"; 
+                    }
+                    <td style = "@str">
                         @if (!start && date.DayOfWeek == (DayOfWeek)(day))
                         {
                             <p align="right">
@@ -69,15 +76,10 @@
                             @CalendarUtil.GetMonth(Model.date.Month - 1);
                         }
                         <br>
-                        
-                        @{
-                            DateTime tempDate = date.AddDays(days - 1);
-                            var subjects = db.Subjects.Where(s => s.UserId == user.Id && s.Date.Day == tempDate.Day && s.Date.Month == tempDate.Month).ToList();
-                        }
                         @if (subjects != null && subjects.Count != 0)
                         {
-                            tempDate = date.AddDays(days - 1);
                             <a asp-action ="OpenWorkPage" asp-controller ="Student" asp-route-date = "@tempDate.ToString()" >Есть задания</a>
+                                   
                         }   
                         else
                         {
@@ -88,4 +90,12 @@
             </tr>
         }
     </table>
+    <script>
+        var tds = document.querySelectorAll('td');
+        tds.forEach(function(item)
+        {
+            item.
+        })
+        
+    </script>
 </body>
