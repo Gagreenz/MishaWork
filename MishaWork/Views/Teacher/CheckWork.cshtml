@@ -18,7 +18,7 @@
         {
             <tr>
                 <td><div>@subject.Date.ToUniversalTime().ToString("d")</div></td>
-                <td><a asp-action = "" asp-controller = "Teacher">@subject.Name</a></td>
+                <td>@subject.Name</td>
                 @if(subject.Path != null)
                 {
                     <td>
